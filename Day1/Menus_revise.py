@@ -35,6 +35,8 @@ True_False = True
 
 # ****************函数定义*****************
 '''获取文件内容'''
+
+
 def Get_File_Content(Mefile, filename):
     if os.path.exists(filename):
         pkl_file = open(filename, 'rb')
@@ -44,6 +46,8 @@ def Get_File_Content(Mefile, filename):
     else:
         return {}
 '''get true or false'''
+
+
 def Get_Input(input_num):
     if input_num.isdigit() and int(input_num) in (range(1, 4)):
         return True
