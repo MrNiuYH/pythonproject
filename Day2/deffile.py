@@ -89,9 +89,39 @@ print(s2)
 s2 = "name is {name}, age is {age}".format(**dic)
 print(s2)
 '''
-def li_append(li):
-    li.append("ddd")
-lis = [11, 22, 33, 44]
-li_append(lis)
-print(lis)  # [11, 22, 33, 44, 'ddd']
+# def li_append(li):
+#     li.append("ddd")
+# lis = [11, 22, 33, 44]
+# li_append(lis)
+# print(lis)  # [11, 22, 33, 44, 'ddd']
 
+
+# 三元运算  如果表达式成立 name就赋值为前面的值，不成立就赋值为后面的值
+name = "niu" if 1 > 3 else "wang"
+print(name)
+
+# lambda 表达式
+def lam(a):
+    return a + 1
+
+t = lambda a: a+1
+# t 函数名   a 为参数  a+1 表达式
+print(t(6))     # 7
+
+# 内置函数
+# abs() 取绝对值
+print(abs(-1))  # 1
+# all() 函数内部参数全部为真则为真
+print(all([1, -1, 2, -2, 3]))   # true
+print(all([1, -1, 2, -2, 0]))   # false
+print(all([1, -1, "", {}, (), []]))    # false
+# any  一个为真便为真
+print(any((1, 0, "", {}, (), [], None)))    # true
+# bool 判断真假。返回true or false
+print(bool(1))  # true
+# bin() 数字十进制转2进制
+print(bin(8))   # 0b1000
+# oct() 数字十进制转八进制
+print(oct(9))   # 0o11
+# hex() 数字十进制转十六进制
+print(hex(10))  # 0xa
