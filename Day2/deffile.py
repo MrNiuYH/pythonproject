@@ -125,3 +125,50 @@ print(bin(8))   # 0b1000
 print(oct(9))   # 0o11
 # hex() 数字十进制转十六进制
 print(hex(10))  # 0xa
+
+# utf-8  一个汉字 占三个字节
+# gbk 一个汉字 占两个字节
+# 字符串转换成字节
+print(bytes('汉字', encoding='utf-8'))
+print(bytes('汉字', encoding='gbk'))
+# 字节转换成字符串
+s = str(bytes('字符串转换成字节', encoding='utf-8'), encoding='utf-8')
+print(s)
+
+# 文件操作
+'''
+打开文件，
+操作文件，
+关闭文件'''
+
+# 打开文件 （加b 表示以字节方式进行读写 rb、wb、xb、ab）
+
+# 单独的 只读只写模式
+f = open('file', 'r')  # 只读
+f = open('file', 'w')  # 只写，清空文件写入
+f = open('file', 'x')  # 如果文件存在，报错，不存在 创建并写入
+f = open('file', 'a')  # 追加
+
+# 文件操作
+# + 表示可以同时读写文件
+f = open('file', 'w+')  # 清空文件后读写
+f = open('file', 'x+')  # 如果文件存在，报错，不存在 创建并写入
+f = open('file', 'a+')  # 读写
+f = open('file', 'r+', encoding='utf-8')  # 读写 常用
+# 如果没有b 读取则按照 字符来读取，如果包含字符串，写入时可能会乱码
+print(f.read(2))    # read 无参数，读全部  有参数 读取有b就按照字节读取，无则按照字符读取
+f.readline()    # 读取一行
+# 获取当前指针的位置（根据字节获取）
+f.tell()
+# 调整指针的位置（根据字节调整）
+f.seek(7)
+# 截断，只保留指针前面的文件
+f.truncate()
+# 根据指针位置 向后覆盖，不会改变总体长度
+f.write("sss")
+f.flush()   # 强制写入
+
+f.close()   # 关闭文件
+with open('file') as f:     # pass 代码块，结束后自动关闭
+    pass
+
