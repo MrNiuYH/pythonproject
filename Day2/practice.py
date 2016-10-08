@@ -76,4 +76,18 @@
 #     old_dict[i] = new_dict[i]
 #
 # print(old_dict)
+# ll = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000     222"
+# print(type(ll.split()[1:2][0]), ll.split()[1:2][0])
+import json
+li = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000,server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000"
 
+# if li.startswith('backend'):
+#     print("cunz")
+#
+# if li.endswith('admin.xiju.com'):
+#     print("cunz")
+
+#
+# print(ll.strip())
+a = li.split(",")
+print(type(a), a)
