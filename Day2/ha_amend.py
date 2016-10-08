@@ -24,6 +24,25 @@ SERMSG = '''请输入要修改的整个servers信息。以，间隔
 '''
 
 
+def Write_file(id, lists):     # 更新并写入文件
+    with open(FILENAME, 'r', encoding='utf-8') as old, \
+            open(NEWFILE, 'w', encoding='utf-8') as new:
+        To = False
+        for i in old:
+            if i.startswith('backend') and To:
+                new.write(i)
+                To = False
+                continue
+            if i.startswith('backend') and i.strip().endswith(id):
+                To = True
+                new.write(i)
+                for j in lists:
+                    new.write(' ' * 4 + j + '\n')
+                new.write('\n')
+            if not To:
+                new.write(i)
+
+
 def Back_ha(filename, oldfile):   # 复制配置文件
     with open(filename, 'r', encoding='utf-8') as old,\
             open(oldfile, 'w', encoding='utf-8') as new:
@@ -57,22 +76,23 @@ def Add_backend(backid,servers):  # 添加 backend 及 server信息
                 print("xiugai")
             else:
                 li.append(servers)
-                with open(FILENAME, 'r', encoding='utf-8') as old, \
-                        open(NEWFILE, 'w', encoding='utf-8') as new:
-                    To = False
-                    for i in old:
-                        if i.startswith('backend') and To:
-                            new.write(i)
-                            To = False
-                            continue
-                        if i.startswith('backend') and i.strip().endswith(backid):
-                            To = True
-                            new.write(i)
-                            for j in li:
-                                new.write(' ' * 4 + j + '\n')
-                            new.write('\n')
-                        if not To:
-                            new.write(i)
+                Write_file(backid, li)
+                # with open(FILENAME, 'r', encoding='utf-8') as old, \
+                #         open(NEWFILE, 'w', encoding='utf-8') as new:
+                #     To = False
+                #     for i in old:
+                #         if i.startswith('backend') and To:
+                #             new.write(i)
+                #             To = False
+                #             continue
+                #         if i.startswith('backend') and i.strip().endswith(backid):
+                #             To = True
+                #             new.write(i)
+                #             for j in li:
+                #                 new.write(' ' * 4 + j + '\n')
+                #             new.write('\n')
+                #         if not To:
+                #             new.write(i)
     else:   # backend 不存在 则直接 尾部添加
         with open(FILENAME, 'r', encoding='utf-8') as old, \
                 open(NEWFILE, 'w', encoding='utf-8') as new:
@@ -84,12 +104,29 @@ def Add_backend(backid,servers):  # 添加 backend 及 server信息
 
 
 def Modif_backend(backid,servers):   # 修改 backend 及 server信息
-    SERLIST = Sel_backend(FILENAME, backid)
+    SERLIST = Sel_backend(FILENAME, backid)     # 获取server信息
     if SERLIST:
         ser = servers.split(',')
+        Write_file(backid, ser)
+        # with open(FILENAME, 'r', encoding='utf-8') as old, \
+        #         open(NEWFILE, 'w', encoding='utf-8') as new:
+        #     To = False
+        #     for i in old:
+        #         if i.startswith('backend') and To:
+        #             new.write(i)
+        #             To = False
+        #             continue
+        #         if i.startswith('backend') and i.strip().endswith(backid):
+        #             To = True
+        #             new.write(i)
+        #             for j in ser:
+        #                 new.write(' ' * 4 + j + '\n')
+        #             new.write('\n')
+        #         if not To:
+        #             new.write(i)
+        return True
     else:
-        print(NOHAVE)
-    pass
+        return False
 
 
 def Del_backend():   # 删除 backend 及 server信息
@@ -114,7 +151,12 @@ while True:
     elif selectid == "3" or selectid == "删除":
         pass
     elif selectid == "4" or selectid == "修改":
-        pass
+        banid = input(BANSEL)
+        servers = input(SERMSG)
+        if Modif_backend(banid, servers):
+            print("修改成功")
+        else:
+            print("修改失败")
     elif selectid == "5" or selectid == "退出":
         exit("退出")
     else:
