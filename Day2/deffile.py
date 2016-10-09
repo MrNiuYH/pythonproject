@@ -94,8 +94,45 @@ print(s2)
 # lis = [11, 22, 33, 44]
 # li_append(lis)
 # print(lis)  # [11, 22, 33, 44, 'ddd']
+'''
+# 文件操作
 
+# 打开文件，
+# 操作文件，
+# 关闭文件
 
+# 打开文件 （加b 表示以字节方式进行读写 rb、wb、xb、ab）
+
+# 单独的 只读只写模式
+f = open('file', 'r')  # 只读
+f = open('file', 'w')  # 只写，清空文件写入
+f = open('file', 'x')  # 如果文件存在，报错，不存在 创建并写入
+f = open('file', 'a')  # 追加
+
+# 文件操作
+# + 表示可以同时读写文件
+f = open('file', 'w+')  # 清空文件后读写
+f = open('file', 'x+')  # 如果文件存在，报错，不存在 创建并写入
+f = open('file', 'a+')  # 读写
+f = open('file', 'r+', encoding='utf-8')  # 读写 常用
+# 如果没有b 读取则按照 字符来读取，如果包含字符串，写入时可能会乱码
+print(f.read(2))    # read 无参数，读全部  有参数 读取有b就按照字节读取，无则按照字符读取
+f.readline()    # 读取一行
+# 获取当前指针的位置（根据字节获取）
+f.tell()
+# 调整指针的位置（根据字节调整）
+f.seek(7)
+# 截断，只保留指针前面的文件
+f.truncate()
+# 根据指针位置 向后覆盖，不会改变总体长度
+f.write("sss")
+f.flush()   # 强制写入
+
+f.close()   # 关闭文件
+with open('file') as f:     # pass 代码块，结束后自动关闭
+    pass
+'''
+'''
 # 三元运算  如果表达式成立 name就赋值为前面的值，不成立就赋值为后面的值
 name = "niu" if 1 > 3 else "wang"
 print(name)
@@ -134,41 +171,56 @@ print(bytes('汉字', encoding='gbk'))
 # 字节转换成字符串
 s = str(bytes('字符串转换成字节', encoding='utf-8'), encoding='utf-8')
 print(s)
-
-# 文件操作
 '''
-打开文件，
-操作文件，
-关闭文件'''
 
-# 打开文件 （加b 表示以字节方式进行读写 rb、wb、xb、ab）
+'''20161009'''
+# Ascii码对照值
+c = chr(77)
+print(c)
+o = ord("c")
+print(o)
 
-# 单独的 只读只写模式
-f = open('file', 'r')  # 只读
-f = open('file', 'w')  # 只写，清空文件写入
-f = open('file', 'x')  # 如果文件存在，报错，不存在 创建并写入
-f = open('file', 'a')  # 追加
+# Ascii码应用生成5位随机验证码
+'''
+import random   # random 生成随机数
+# li = []
+# for i in range(1, 6):
+#     c = random.randrange(97, 123)
+#     letter = chr(c)
+#     li.append(letter)
+# ls = "".join(li)
+# 生成5位随机验证码 优化版
+li = []
+for i in range(1, 6):
+    ran = random.randrange(0, 5)
+    if ran == 1 or ran == 2:
+        c = random.randrange(0, 10)
+        li.append(str(c))
+    else:
+        c = random.randrange(65, 91)
+        letter = chr(c)
+        li.append(letter)
+ls = "".join(li)
+print(ls)
+'''
 
-# 文件操作
-# + 表示可以同时读写文件
-f = open('file', 'w+')  # 清空文件后读写
-f = open('file', 'x+')  # 如果文件存在，报错，不存在 创建并写入
-f = open('file', 'a+')  # 读写
-f = open('file', 'r+', encoding='utf-8')  # 读写 常用
-# 如果没有b 读取则按照 字符来读取，如果包含字符串，写入时可能会乱码
-print(f.read(2))    # read 无参数，读全部  有参数 读取有b就按照字节读取，无则按照字符读取
-f.readline()    # 读取一行
-# 获取当前指针的位置（根据字节获取）
-f.tell()
-# 调整指针的位置（根据字节调整）
-f.seek(7)
-# 截断，只保留指针前面的文件
-f.truncate()
-# 根据指针位置 向后覆盖，不会改变总体长度
-f.write("sss")
-f.flush()   # 强制写入
+# compile() 将字符串转换成python代码
+# 例如
+s = "print('abc')"
+py = compile(s, '<string>', 'exec')
+print(py)   # abc
+exec(py)
 
-f.close()   # 关闭文件
-with open('file') as f:     # pass 代码块，结束后自动关闭
-    pass
+# exec() 执行python代码，可接收字符串(会先内部转换成python代码再执行)或者python代码，没有返回值
+exec(s)     # abc
 
+# eval()    # 执行 表达式 并有返回值
+ev = eval("1+2")
+print(ev)   # 3
+
+# dir()  查看对象提供了哪些功能
+# help() 查看对象提供的功能及源码
+divmod()
+enumerate()
+isinstance()
+issubclass()
