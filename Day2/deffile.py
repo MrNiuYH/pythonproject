@@ -220,7 +220,34 @@ print(ev)   # 3
 
 # dir()  查看对象提供了哪些功能
 # help() 查看对象提供的功能及源码
-divmod()
-enumerate()
-isinstance()
-issubclass()
+# divmod() 取商及余数
+di1, di2 = divmod(10, 3)
+print(di1, di2)
+# enumerate() 多用于循环中，
+list1 = ["这", "是", "一个", "测试"]
+for i in enumerate(list1):
+    print(i[0], i[1])
+# isinstance() 判断定义的对象是否是指定类的实例
+isi = isinstance([11, 22, 33], list)
+isi1 = isinstance([11, 22, 33], dict)
+print(isi, isi1)
+
+# filter 筛选
+# filter(函数，可迭代的对象(可以for循环))  内部做循环，循环第二个可迭代的对象，传给第一个函数执行，返回true则
+li = (1, 2, 44, 22, 3)
+def fi(a):
+    if a < 20:
+        return True
+print(list(filter(fi, li)))
+s = 'aassbsacc'
+print(list(filter(lambda a: a != 's', s)))
+# map 可用于批量的统一对某个可迭代的对象做操作
+print(list(map(lambda a: a.upper(), s)))
+
+# globals()   获取所有的全局变量
+# locals()    获取所有的局部变量
+
+# hash() 把给定的值转换成一个hash值
+# max()最大值   min()最小值   sum()求和  pow()求次方  round()四舍五入
+# reversed() 反转
+

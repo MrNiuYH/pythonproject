@@ -90,6 +90,7 @@ li = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000,server 192.168.1.51
 #
 # print(ll.strip())
 a = li.split(",")
+a.reverse()
 # print(type(a), a)
 # c = a.index("server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000")
 # print(c)
