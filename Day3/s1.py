@@ -4,14 +4,12 @@
 
 import a1
 
-<<<<<<< HEAD
 ret = a1.ss1('amen')
-=======
+
 a1.ss1()
 # a1.ss2()
 # a1.ss3()
-print(0.19*100)
->>>>>>> 3e259995f2c4680d085d4ad12e31a0ceb160c254
+
 
 print("返回值", ret)
 print('------------------')
