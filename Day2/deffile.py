@@ -233,7 +233,8 @@ isi1 = isinstance([11, 22, 33], dict)
 print(isi, isi1)
 
 # filter 筛选
-# filter(函数，可迭代的对象(可以for循环))  内部做循环，循环第二个可迭代的对象，传给第一个函数执行，返回true则
+# filter(函数，可迭代的对象(可以for循环))  内部做循环，循环第二个可迭代的对象，传给第一个函数执行，
+# 返回true则
 li = (1, 2, 44, 22, 3)
 def fi(a):
     if a < 20:

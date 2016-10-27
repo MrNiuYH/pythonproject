@@ -79,7 +79,7 @@
 # ll = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000     222"
 # print(type(ll.split()[1:2][0]), ll.split()[1:2][0])
 import json
-li = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000,server 192.168.1.51 192.168.1.51 weight 3 maxconn 5000"
+# li = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000,server 192.168.1.51 192.168.1.51 weight 3 maxconn 5000"
 
 # if li.startswith('backend'):
 #     print("cunz")
@@ -89,8 +89,8 @@ li = "server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000,server 192.168.1.51
 
 #
 # print(ll.strip())
-a = li.split(",")
-a.reverse()
+# a = li.split(",")
+# a.reverse()
 # print(type(a), a)
 # c = a.index("server 192.168.1.50 192.168.1.50 weight 3 maxconn 5000")
 # print(c)
@@ -106,11 +106,11 @@ a.reverse()
 
 # print('\033[46;1mbackend\033[0m')
 
-selnu = input("请输入你要删除server信息前面的序号:")
-print(type(selnu), selnu)
-
-if selnu.isdigit():
-    print('1111111')
+# selnu = input("请输入你要删除server信息前面的序号:")
+# print(type(selnu), selnu)
+#
+# if selnu.isdigit():
+#     print('1111111')
 
 # def Write_file(id):     # 更新并写入文件
 #     with open("haproxy.cfg", 'r', encoding='utf-8') as old, \
@@ -127,3 +127,34 @@ if selnu.isdigit():
 #                 new.write(i)
 #
 # Write_file("new.xiju.com")
+
+# 生成器
+
+
+def run(nu):
+    a = 0
+    while True:
+        if a > nu:
+            return
+        yield a
+        a += 1
+
+for i in run(3):
+    print(i)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
