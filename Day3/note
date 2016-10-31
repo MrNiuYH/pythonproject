@@ -1,0 +1,330 @@
+函数
+	1、def
+	2、命名
+	3、函数体
+	4、return 返回值
+
+def get_return():
+	a = 1
+	return a
+
+函数参数有 形参和实参
+	定义几个形参就要传几个实参。
+	形参接收传参的时候默认是一一对应的
+
+1、普通参数
+def get_return(b): # b为形参
+	a = b + 1
+	return a
+get_return(3) # 实参
+
+2、默认参数：（指定默认参数时，形参必须要放到末尾）
+def get_value(aa, bb, cc = "ok")
+	print(aa, bb, cc)
+get_value(11, 22, "no")
+如果形参设有默认值，传参的时候可以传三个参数，也可以传2个参数
+	传3个参数，cc就等于新的参数，否则就是默认参数
+
+3、指定参数
+get_value(bb = 21,aa = 5)
+
+4、动态参数  可传多个参数
+(1)*
+默认都会当做元组的一个元素添加到元组中
+def get_all_v(*value):
+    print(value)
+
+get_all_v(23)   # (23,)
+li = [23, 445, 66, "dsad"]
+get_all_v(li)   # ([23, 445, 66, 'dsad'],)
+get_all_v(li, 34)   # ([23, 445, 66, 'dsad'], 34)
+
+传值加*的话 al里面的所有元素都会转换到元组中
+get_all_v(*li)   # (23, 445, 66, 'dsad')
+get_all_v(*li, 34)  # (23, 445, 66, 'dsad', 34)
+(2)**
+默认都会当做字典的一个键值对（k：v）添加到字典中
+传值时要指定k，v
+def get_all_w(**value):
+    print(value)
+v2 = [23, 543, 66]
+get_all_w(k1="v1")  # {'k1': 'v1'}
+get_all_w(k2=v2)    # {'k2': [23, 543, 66]}
+
+dic = {"k1": "v1", "k2": "v2"}
+get_all_w(**dic)    # {'k1': 'v1', 'k2': 'v2'}
+(3)* ** 万能参数
+def get_all_a(*v, **v1):
+	print(v)
+	print(v1)
+get_all_a(11, 2, 33, k1="v1", k2="v2")
+'''
+(11, 2, 33)
+{'k1': 'v1', 'k2': 'v2'}'''
+
+
+str.format() 函数参数应用
+li = ["niu", 20]
+dic = {"name": "niu", "age": 28}
+s1 = "name is {0}, age is {1}".format("niu", 20)
+print(s1)	# name is niu, age is 20
+s1 = "name is {0}, age is {1}".format(*li)
+print(s1)	# name is niu, age is 20
+s2 = "name is {name}, age is {age}".format(
+    name="niu",
+    age=28
+)
+print(s2)	# name is niu, age is 28
+s2 = "name is {name}, age is {age}".format(**dic)
+print(s2)	# name is niu, age is 28
+
+函数拓展
+
+函数传递参数时传递的是一个引用，引用值更新时，原定义的实参也会更新
+def li_append(li):
+    li.append("ddd")
+lis = [11, 22, 33, 44]
+li_append(lis)
+print(lis)  # [11, 22, 33, 44, 'ddd']
+
+全局变量
+1、都可以读
+2、如果在局域中[重新赋值]全局变量的话需要先global name
+3、如果变量是列表或者字典时，全局变量可以追加
+4、全局变量 变量名都大写
+
+
+# 三元运算  如果表达式成立 name就赋值为前面的值，不成立就赋值为后面的值
+name = "niu" if 1 > 3 else "wang"
+print(name)
+
+# lambda 表达式
+def lam(a):
+    return a + 1
+
+t = lambda a: a+1
+# t 函数名   a 为参数  a+1 表达式
+print(t(6))     # 7
+
+# 文件操作
+'''
+打开文件，
+操作文件，
+关闭文件'''
+
+# 打开文件 （加b 表示以字节方式进行读写 rb、wb、xb、ab）
+
+# 单独的 只读只写模式
+f = open('file', 'r')  # 只读
+f = open('file', 'w')  # 只写，清空文件写入
+f = open('file', 'x')  # 如果文件存在，报错，不存在 创建并写入
+f = open('file', 'a')  # 追加
+
+# 文件操作
+# + 表示可以同时读写文件
+f = open('file', 'w+')  # 清空文件后读写
+f = open('file', 'x+')  # 如果文件存在，报错，不存在 创建并写入
+f = open('file', 'a+')  # 读写
+f = open('file', 'r+', encoding='utf-8')  # 读写 常用
+# 如果没有b 读取则按照 字符来读取，如果包含字符串，写入时可能会乱码
+print(f.read(2))    # read 无参数，读全部  有参数 读取有b就按照字节读取，无则按照字符读取
+f.readline()    # 读取一行
+# 获取当前指针的位置（根据字节获取）
+f.tell()
+# 调整指针的位置（根据字节调整）
+f.seek(7)
+# 截断，只保留指针前面的文件
+f.truncate()
+# 根据指针位置 向后覆盖，不会改变总体长度
+f.write("sss")
+f.flush()   # 强制写入
+
+f.close()   # 关闭文件
+with open('file') as f:     # pass 代码块，结束后自动关闭
+    pass
+
+
+# 内置函数
+# abs() 取绝对值
+print(abs(-1))  # 1
+# all() 函数内部参数全部为真则为真
+print(all([1, -1, 2, -2, 3]))   # true
+print(all([1, -1, 2, -2, 0]))   # false
+print(all([1, -1, "", {}, (), []]))    # false
+# any  一个为真便为真
+print(any((1, 0, "", {}, (), [], None)))    # true
+# bool 判断真假。返回true or false
+print(bool(1))  # true
+# bin() 数字十进制转2进制
+print(bin(8))   # 0b1000
+# oct() 数字十进制转八进制
+print(oct(9))   # 0o11
+# hex() 数字十进制转十六进制
+print(hex(10))  # 0xa
+
+# utf-8  一个汉字 占三个字节
+# gbk 一个汉字 占两个字节
+# 字符串转换成字节
+print(bytes('汉字', encoding='utf-8'))
+print(bytes('汉字', encoding='gbk'))
+# 字节转换成字符串
+s = str(bytes('字符串转换成字节', encoding='utf-8'), encoding='utf-8')
+print(s)
+
+Ascii码
+chr() 把数字转换成对应的字母
+ord() 把字母转换成对应的数字
+---转换可用于生成随机验证码
+import random
+list = []
+for i in range(1,6):
+	var = random.randrange(1, 6)
+	if var == 1 or var == 2:
+		c = random.randrange(0, 10)
+		list.append(str(c))
+	else:
+		c = random.randrange(65, 91)
+		ch = chr(c)
+		list.append(ch)
+li = "".join(list)
+print(li)
+
+compile() 把字符串转换成python代码
+eval() 执行表达式，有返回结果
+exec() 执行字符串或者python代码，无返回结果
+
+# compile()
+# 例如
+s = "print('abc')"
+py = compile(s, '<string>', 'exec')
+print(py)   # abc
+exec(py)
+
+# exec() 执行python代码，可接收字符串(会先内部转换成python代码再执行)或者python代码，没有返回值
+exec(s)     # abc
+
+# eval()    # 执行 表达式 并有返回值
+ev = eval("1+2")
+print(ev)   # 3
+
+# dir()  查看对象提供了哪些功能
+# help() 查看对象提供的功能及源码
+# divmod() 取商及余数
+di1, di2 = divmod(10, 3)
+print(di1, di2)
+# enumerate() 多用于循环中，
+list1 = ["这", "是", "一个", "测试"]
+for i in enumerate(list1):
+    print(i[0], i[1])
+# isinstance() 判断定义的对象是否是指定类的实例
+isi = isinstance([11, 22, 33], list)
+isi1 = isinstance([11, 22, 33], dict)
+print(isi, isi1)
+
+# filter 筛选
+# filter(函数，可迭代的对象(可以for循环))  内部做循环，循环第二个可迭代的对象，传给第一个函数执行，
+# 返回true则
+li = (1, 2, 44, 22, 3)
+def fi(a):
+    if a < 20:
+        return True
+print(list(filter(fi, li)))
+s = 'aassbsacc'
+print(list(filter(lambda a: a != 's', s)))
+# map 可用于批量的统一对某个可迭代的对象做操作
+print(list(map(lambda a: a.upper(), s)))
+
+# globals()   获取所有的全局变量
+# locals()    获取所有的局部变量
+
+# hash() 把给定的值转换成一个hash值
+# max()最大值   min()最小值   sum()求和  pow()求次方  round()四舍五入
+# reversed() 反转
+
+装饰器
+# @+函数名
+# 功能
+#    1、自动执行函数（auto）并且将‘@函数名’（@auto）下面的函数名（ss1）[函数名ss1代表一个整体]当做参数传递给函数
+#    2、将函数auto的返回值inpu重新赋值给‘@函数名’@auto下面的函数名ss1
+
+def auto(fun):
+    def inpu(*args, **kwargs):  # 万能参数
+        print("open")    # 函数前添加功能
+        r = fun(*args, **kwargs)   # 原函数有返回值，接收并返回
+        print("end")    # 函数后添加功能
+        return r
+    return inpu
+
+@auto
+def ss1():    # 无参数
+    print("ss1")
+    return 'fan'
+
+
+@auto
+def ss1(k):     # 有参数
+    print(k)
+    return 'fan'
+
+
+@auto
+def ss2(s1, s2):
+    print(s1 + s2)
+
+调用
+import a1
+
+ret = a1.ss1('amen')
+
+print("返回值", ret)
+print('------------------')
+
+a1.ss2(3, 4)
+
+字符串格式化 format [] 都是可选的，可填可不填
+格式：[[fill][align][sign][#][0][width][,][.precision][type]
+fill  填充字符
+align 对齐方式
+	^ 居中			s = "{:-^20d}".format(20)			-----20-----
+	< 内容左对齐	s = "{:-<20d}".format(20)			20----------
+	> 内容右对齐	s = "{:->20d}".format(20)			----------20
+	= 内容右对齐，将符号放在填充字符的左侧，只对数字有效
+sign  有无符号数字(感觉用处不大)
+	+   	正数加+ 负数加-		s = "{:+d} this is Numbers".format(-20)		-20
+	-		正数不变  负数加-	s = "{:-d} this is numbers".format(23) 		23
+	空格	正数空格   负数加-  s = "{: d} this is numbers".format(23)      23
+#     对数字有效，对于二、八、十六进制，会对应显示 0b 0o 0x	s = "{:#0x}".format(213)
+width 格式化字符宽度			s = "{:-^20d}".format(20)
+,     对大的数字有效，添加分隔符 如1,000,000	s = "{:,d}".format(2000000000)   2,000,000,000
+.precision  小数位保留精度	s = "{:.2f}".format(12.2323)		12.23
+type  格式化类型
+	s 字符串 	s = "this is {}".format("string")
+	b 十进制转二进制表示 然后格式化   s = "{:d}".format(23)   10111
+	d 十进制
+	o 十进制转八进制表示 然后格式化		s = "{:o}".format(23)   27
+	x 十进制转十六进制表示 然后格式化   s = "{:x}".format(23)   17
+	f 浮点型 默认小数点保留6位
+	% 显示百分比 默认小数点后6位 		s = "{:.2%}".format(0.1234)
+
+参数可用[]及{} ,使用时必须加*，**
+s = "my name is {},age is {}".format(*["niu", 25])
+
+s = "my name is {name}, age is {age}".format(**{"name": "niu", "age": 25})
+
+# 生成器   关键词 yield
+'''特点
+        1、找到yield 通过__next__() 方法获取后面的值
+        2、依次从上到下获取，不能回退
+        3、用于循环较大的数据集合，节省内存
+'''
+
+
+def fun1():
+    yield 111
+    yield 222
+
+f = fun1()
+f1 = f.__next__()   # 进入函数，找到yield 并获取yield后面的值
+print(f1)
+f2 = f.__next__()
+print(f2)

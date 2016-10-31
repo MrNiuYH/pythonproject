@@ -2,19 +2,19 @@
 # -*- coding:utf-8 -*-
 # Author:Mr.Niu
 
-import a1
-
-ret = a1.ss1('amen')
-
-a1.ss1()
-# a1.ss2()
-# a1.ss3()
-
-
-print("返回值", ret)
-print('------------------')
-
-a1.ss2(3, 4)
+# import a1
+#
+# ret = a1.ss1('amen')
+#
+# a1.ss1(12)
+# # a1.ss2()
+# # a1.ss3()
+#
+#
+# print("返回值", ret)
+# print('------------------')
+#
+# a1.ss2(3, 4)
 
 # s = "ss %s %%" % ('sb')
 # tpl = "i am %(pp).2f %%" % {"pp": 123.425556, }
@@ -79,15 +79,45 @@ a1.ss2(3, 4)
 # s = "{:.2%}".format(0.1234)
 # print(s)
 
-li = [23, 43, 100, 34]
+# li = [23, 43, 100, 34]
+#
+#
+# def fun(i):
+#     if i > 29:
+#         return True
+# print(list(filter(fun, li)))
+#
+# print(list(filter(lambda i: i > 29, li)))
+#
+# # s = lambda 参数: 表达式
+# a = lambda j: j > 30
+
+# # 生成器   关键词 yield
+# '''特点
+#         1、找到yield 通过__next__() 方法获取后面的值
+#         2、依次从上到下获取，不能回退
+#         3、用于循环较大的数据集合，节省内存
+# '''
+#
+#
+# def fun1():
+#     yield 111
+#     yield 222
+#
+# f = fun1()
+# f1 = f.__next__()   # 进入函数，找到yield 并获取yield后面的值
+# print(f1)
+# f2 = f.__next__()
+# print(f2)
 
 
-def fun(i):
-    if i > 29:
-        return True
-print(list(filter(fun, li)))
+# # 递归
+# str = "1*2*3*4*5*6*7*8"
 
-print(list(filter(lambda i: i > 29, li)))
-
-# s = lambda 参数: 表达式
-a = lambda j: j > 30
+def digui(n):
+    if n == 1:
+        return 1
+    else:
+        return n * digui(n-1)
+result = digui(9)
+print(result)
