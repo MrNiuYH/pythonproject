@@ -114,10 +114,39 @@
 # # 递归
 # str = "1*2*3*4*5*6*7*8"
 
-def digui(n):
-    if n == 1:
-        return 1
-    else:
-        return n * digui(n-1)
-result = digui(9)
-print(result)
+# def digui(n):
+#     if n == 1:
+#         return 1
+#     else:
+#         return n * digui(n-1)
+# result = digui(9)
+# print(result)
+
+# import json
+# # 序列化 反序列化
+# # 1.json
+# li = [11, 22, 33, 44]
+# st1 = "[12,23,34]"
+# l1 = json.loads(st1)
+
+# print(l1)
+# print(json.loads(st1), type(json.loads(st1)))
+# print(json.dumps(li), type(json.dumps(li)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
