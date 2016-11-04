@@ -20,7 +20,7 @@ import datetime
 '''
 datetime.date   # 表示日期的类  Y-m-d
 datetime.time   # 表示时间的类  H-M-S
-datetime.datetime   # 表示日期时间
+datetime.datetime   # 表示日期时间 格式
 datetime.timedelta  # 表示时间间隔
 datetime.timedelta() 参数可以是 days hours minutes 正数表示在当前的时间上减去这个值，负数表示在当前的时间上加这个值
 '''
@@ -28,5 +28,6 @@ print(datetime.datetime.now())  # 2016-11-04 16:45:34.198335
 print(datetime.datetime.now()-datetime.timedelta(days=1))   # 2016-11-03 16:45:34.198335
 print(datetime.datetime.now()-datetime.timedelta(days=-1))   # 2016-11-05 16:47:40.853278
 print(datetime.datetime.now()-datetime.timedelta(hours=1))   # 2016-11-04 15:47:40.853278
+print(datetime.datetime.now().replace(2016, 12, 2))     # 更改时间 时间替换
 
 
