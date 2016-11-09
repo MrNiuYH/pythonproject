@@ -133,31 +133,30 @@
 # print(json.loads(st1), type(json.loads(st1)))
 # print(json.dumps(li), type(json.dumps(li)))
 
-# 自定义模块导入
-
-'''
-如果在同一级目录下
-    import xxx
-如果在其他目录下
-    from xxx import xxx
-    from xxx import xxx as xxx
-'''
-
-import sys
-import os
-print(sys.path)
-
-print(os.path.abspath(__file__))
-print(os.path.abspath('a1.py'))
-
-print(os.path.dirname(os.path.abspath('a1.py')))
-
-
-print(os.path.dirname(os.path.dirname(os.path.abspath('a1.py'))))
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath('a1.py'))))
-for i in sys.path:
-    print(i)
-
+# # 自定义模块导入
+#
+# '''
+# 如果在同一级目录下
+#     import xxx
+# 如果在其他目录下
+#     from xxx import xxx
+#     from xxx import xxx as xxx
+# '''
+#
+# import sys
+# import os
+# print(sys.path)
+#
+# print(os.path.abspath(__file__))
+# print(os.path.abspath('a1.py'))
+#
+# print(os.path.dirname(os.path.abspath('a1.py')))
+#
+#
+# print(os.path.dirname(os.path.dirname(os.path.abspath('a1.py'))))
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath('a1.py'))))
+# for i in sys.path:
+#     print(i)
 
 
 
