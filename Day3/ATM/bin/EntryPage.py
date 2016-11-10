@@ -2,22 +2,25 @@
 # -*- coding:utf-8 -*-
 # Author:Mr.Niu
 
-import sys
 import os
-import ad_login as ad
-import us_login as us
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src import user
+from src import admin
 
 PMSG = '''
     1.用户登录
     2.管理员登录
 '''
-
 print(PMSG)
+
 re = input("please input a number!:").strip()
 
 if re == "1":
-    us.login()
+    user.run()
 elif re == "2":
-    ad.login()
+    admin.run()
 else:
-    print("input error!")
+    print("Input Error")
+
+    

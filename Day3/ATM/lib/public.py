@@ -4,6 +4,8 @@
 
 import random
 import hashlib
+import os
+
 
 
 def rand():
@@ -26,3 +28,8 @@ def md5(pwd):
     m = hashlib.md5()
     m.update(pwd)
     return m.hexdigest()
+
+
+def get_path():
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+

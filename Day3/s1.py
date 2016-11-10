@@ -156,7 +156,12 @@
 # print(os.path.dirname(os.path.dirname(os.path.abspath('a1.py'))))
 # sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath('a1.py'))))
 # for i in sys.path:
-#     print(i)
+#    print(i)
+#
+# import json
+# import os
+# # json.dump([1, 2, 3], open(os.path.join()))
+# print(os.path.abspath(__file__))
 
 
 
