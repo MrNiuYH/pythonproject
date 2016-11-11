@@ -22,5 +22,3 @@ elif re == "2":
     admin.run()
 else:
     print("Input Error")
-
-    

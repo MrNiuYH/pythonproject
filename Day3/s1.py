@@ -158,10 +158,15 @@
 # for i in sys.path:
 #    print(i)
 #
-# import json
-# import os
+import json
+import os
+# from lib import public as pu
 # # json.dump([1, 2, 3], open(os.path.join()))
 # print(os.path.abspath(__file__))
+print(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ATM', 'db', 'admin'))
+
+json.dump([1, 2, 3], open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                       'ATM', 'db', 'admin', 'test'), 'w'))
 
 
 

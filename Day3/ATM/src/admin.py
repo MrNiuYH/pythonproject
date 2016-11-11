@@ -73,6 +73,3 @@ def login():
 def run():
     if login():
         count()
-
-
-add_user()
