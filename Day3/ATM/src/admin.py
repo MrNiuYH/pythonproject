@@ -6,7 +6,11 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from conf import admin_config as ad
 from lib import public as pu
+from lib import variable as var
 import json
+
+
+pp = pu.get_path()
 
 
 def input_msg():
@@ -35,9 +39,9 @@ def add_user():
     """
     dic = input_msg()
     if dic["role"] == "admin":
-        json.dump(dic, open(os.path.join(pu.get_path, 'db', 'admin', dic['uname'])))
+        json.dump(dic, open(os.path.join(pp, 'db', 'admin', dic['uname'])))
     elif dic["role"] == "user":
-        json.dump(dic, open(os.path.join(pu.get_path, 'db', 'admin', dic['uname'])))
+        json.dump(dic, open(os.path.join(pp, 'db', 'admin', dic['uname'])))
     else:
         print("input error")
 
@@ -50,12 +54,31 @@ def freeze_user():
     pass
 
 
+def update_user():
+    """
+    修改用户信息
+    :return:
+    """
+    pass
+
+
 def count():
     """
     主题函数，根据用户选择进行分类操作
     :return:
     """
-    pass
+    AD_MENU_SEL = {
+        '1': add_user,
+        '2': freeze_user,
+        '3': update_user
+    }
+    print(var.AD_MENU)
+    user_option = input("选择操作序号：").strip()
+    if user_option in AD_MENU_SEL:
+        var.OPERATION.format()
+        AD_MENU_SEL[user_option]()
+    else:
+        print("序号不存在")
 
 
 def login():
@@ -64,14 +87,18 @@ def login():
     :return:
     """
     while True:
-        uname = input("    please input you name:".format())
-        pwd = input("please input you password:")
-        if os.path.isfile(os.path.join(pu.get_path, 'db', 'admin', uname)):
-            print("welcome")
+        uname = input("please input username:")
+        pwd = input("please input password:")
+        if os.path.isfile(os.path.join(pp, 'db', 'admin', uname)):
+            print('welcome')
+            return True
         else:
-            print("用户不存在")
+            print("不存在")
 
 
 def run():
     if login():
         count()
+
+
+
