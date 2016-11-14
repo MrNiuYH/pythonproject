@@ -66,8 +66,10 @@ def login():
     while True:
         uname = input("    please input you name:".format())
         pwd = input("please input you password:")
-        if uname == "niu":
-            add_user()
+        if os.path.isfile(os.path.join(pu.get_path, 'db', 'admin', uname)):
+            print("welcome")
+        else:
+            print("用户不存在")
 
 
 def run():
