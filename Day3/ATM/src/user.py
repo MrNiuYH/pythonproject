@@ -4,7 +4,8 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from conf import admin_config as ac
+from lib import public as pu
+from lib import variable as var
 
 
 def deposit():
@@ -39,21 +40,29 @@ def balance():
     pass
 
 
-def main():
+def repayment():
+    """
+    还款
+    :return:
+    """
+    pass
+
+
+def count():
     """
     主题函数，根据用户选择进行分类操作
     :return:
     """
-
-
-def login():
-    """
-    登录
-    :return:
-    """
-    print("login user")
+    US_MENU_SEL = {
+        '1': deposit,
+        '2': freeze_user,
+        '3': transfer,
+        '4': balance(),
+        '5': repayment()
+    }
+    print(var.USER_MENU)
 
 
 def run():
-    if login():
-        main()
+    if pu.login('userinfo'):
+        count()

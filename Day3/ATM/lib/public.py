@@ -5,12 +5,12 @@
 import random
 import hashlib
 import os
-
+import json
 
 
 def rand():
     li = []
-    for i in range(5):
+    for i in range(10):
         new = random.randrange(1, 9)
         li.append(str(new))
     st = "".join(li)
@@ -33,3 +33,21 @@ def md5(pwd):
 def get_path():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
+def login(file):
+    """
+    登录
+    :return:
+    """
+    pp = get_path()
+    while True:
+        uname = input("please input username:")
+        pwd = input("please input password:")
+        md_pwd = md5(bytes(pwd, encoding='utf-8'))
+        if os.path.isfile(os.path.join(pp, 'db', file, uname)):
+            if md_pwd == json.load(open(os.path.join(pp, 'db', file, uname), 'r'))['passwd']:
+                return True
+            else:
+                print('password error')
+        else:
+            print("用户不存在")

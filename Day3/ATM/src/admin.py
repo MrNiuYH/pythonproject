@@ -39,11 +39,11 @@ def add_user():
     """
     dic = input_msg()
     if dic["role"] == "admin":
-        json.dump(dic, open(os.path.join(pp, 'db', 'admin', dic['uname'])))
+        json.dump(dic, open(os.path.join(pp, 'db', 'admin', dic['uname']), 'w'))
     elif dic["role"] == "user":
-        json.dump(dic, open(os.path.join(pp, 'db', 'admin', dic['uname'])))
+        json.dump(dic, open(os.path.join(pp, 'db', 'userinfo', dic['uname']), 'w'))
     else:
-        print("input error")
+        print("please select admin or user")
 
 
 def freeze_user():
@@ -75,30 +75,13 @@ def count():
     print(var.AD_MENU)
     user_option = input("选择操作序号：").strip()
     if user_option in AD_MENU_SEL:
-        var.OPERATION.format()
         AD_MENU_SEL[user_option]()
     else:
         print("序号不存在")
 
 
-def login():
-    """
-    登录
-    :return:
-    """
-    while True:
-        uname = input("please input username:")
-        pwd = input("please input password:")
-        if os.path.isfile(os.path.join(pp, 'db', 'admin', uname)):
-            print('welcome')
-            return True
-        else:
-            print("不存在")
-
-
 def run():
-    if login():
+    if pu.login('admin'):
         count()
-
 
 
