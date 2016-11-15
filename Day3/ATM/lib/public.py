@@ -42,12 +42,23 @@ def login(file):
     pp = get_path()
     while True:
         uname = input("please input username:")
+        cid = input("please input card:")
         pwd = input("please input password:")
         md_pwd = md5(bytes(pwd, encoding='utf-8'))
-        if os.path.isfile(os.path.join(pp, 'db', file, uname)):
+        if os.path.isfile(os.path.join(pp, 'db', file, cid)):
             if md_pwd == json.load(open(os.path.join(pp, 'db', file, uname), 'r'))['passwd']:
                 return True
             else:
                 print('password error')
         else:
             print("用户不存在")
+
+
+def mkdir(file1, file2):
+    gpath = get_path()
+    os.chdir(os.path.join(gpath, 'db', file1))
+    os.mkdir(file2)
+    os.chdir(os.path.join(gpath, 'db', file1, file2))
+    current = os.getcwd()
+    return current
+

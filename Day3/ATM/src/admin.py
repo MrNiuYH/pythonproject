@@ -39,9 +39,10 @@ def add_user():
     """
     dic = input_msg()
     if dic["role"] == "admin":
-        json.dump(dic, open(os.path.join(pp, 'db', 'admin', dic['uname']), 'w'))
+        json.dump(dic, open(os.path.join(pu.mkdir('admin', dic["card"]), dic['uname']), 'w'))
     elif dic["role"] == "user":
-        json.dump(dic, open(os.path.join(pp, 'db', 'userinfo', dic['uname']), 'w'))
+        json.dump(dic, open(os.path.join(pu.mkdir('userinfo', dic["card"]), dic['uname']), 'w'))
+        print(var.REGISTER.format(cid=dic['card']))
     else:
         print("please select admin or user")
 

@@ -16,3 +16,4 @@ USER_MENU = '''
 5、还款
 '''
 
+REGISTER = "注册成功，卡号为:{cid}"
