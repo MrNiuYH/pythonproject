@@ -39,19 +39,18 @@ def login(file):
     登录
     :return:
     """
-    pp = get_path()
+    gpath = get_path()
     while True:
-        uname = input("please input username:")
         cid = input("please input card:")
         pwd = input("please input password:")
         md_pwd = md5(bytes(pwd, encoding='utf-8'))
-        if os.path.isfile(os.path.join(pp, 'db', file, cid)):
-            if md_pwd == json.load(open(os.path.join(pp, 'db', file, uname), 'r'))['passwd']:
-                return True
+        if os.path.isdir(os.path.join(gpath, 'db', file, cid)):
+            if md_pwd == json.load(open(os.path.join(gpath, 'db', file, cid, 'userinfo'), 'r'))['passwd']:
+                return cid
             else:
                 print('password error')
         else:
-            print("用户不存在")
+            print("卡号错误，请认真输入哦！！！")
 
 
 def mkdir(file1, file2):
@@ -62,3 +61,24 @@ def mkdir(file1, file2):
     current = os.getcwd()
     return current
 
+
+def get_userinfo(cid):
+    """
+    获取用户信息
+    :param cid:
+    :return:
+    """
+    gpath = get_path()
+    if os.path.isdir(os.path.join(gpath, 'db', 'userinfo', cid)):
+        umsg = json.load(open(os.path.join(gpath, 'db', 'userinfo', cid, 'userinfo'), 'r'))
+        return umsg
+
+
+def input_user(dic, cid, filename):
+    """
+    写入文件
+    :param dic:
+    :return:
+    """
+    gpath = get_path()
+    json.dump(dic, open(os.path.join(gpath, 'db', 'userinfo', cid, filename), 'w'))

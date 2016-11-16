@@ -168,8 +168,8 @@ import os
 # json.dump([1, 2, 3], open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 #                                        'ATM', 'db', 'admin', 'test'), 'w'))
 
-print(os.path.join('D:\pythonproject\Day3\ATM', 'db', 'admin', 'test'))
-print(os.path.isfile(os.path.join('D:\pythonproject\Day3\ATM', 'db', 'admin', 'test')))
+# print(os.path.join('D:\pythonproject\Day3\ATM', 'db', 'admin', 'test'))
+# print(os.path.isfile(os.path.join('D:\pythonproject\Day3\ATM', 'db', 'admin', 'test')))
 
 
 
