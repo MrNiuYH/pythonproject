@@ -16,24 +16,40 @@ login_user_cid = ""
 
 
 def input_msg():
-    name = input("用户名:").strip()
-    pwd = input("密 码:").strip()
-    mobile = input("手机号:").strip()
-    quota = input("额 度:").strip()
-    role = input("user/admin:").strip()
-    num = pu.rand()
-    card = "622202" + num
+    while True:
+        name = input("用户名:").strip()
+        pwd = input("密 码:").strip()
+        mobile = input("手机号:").strip()
+        print(var.QUOTA_MSG.format(ad.QUOTA))
+        quota = input("可透支额度:").strip()
+        print(var.USER_MSG)
+        role = input("用户类型:").strip()
+        num = pu.rand()
+        card = "622202" + num
+        p = pu.md5(bytes(pwd, encoding='utf-8'))
 
-    p = pu.md5(bytes(pwd, encoding='utf-8'))
-
-    ad.user_info["card"] = card
-    ad.user_info["uname"] = name
-    ad.user_info["passwd"] = p
-    ad.user_info["phone"] = mobile
-    ad.user_info["quota"] = quota
-    ad.user_info["role"] = role
-    ad.user_info["status"] = "1"
-    return ad.user_info
+        ad.user_info["card"] = card
+        ad.user_info["uname"] = name
+        ad.user_info["passwd"] = p
+        if mobile.isdigit and len(mobile) == 11:
+            ad.user_info["phone"] = mobile
+        else:
+            print("手机号格式错误，重新输入吧！！")
+            continue
+        if quota == "":
+            ad.user_info["quota"] = ad.QUOTA
+        else:
+            ad.user_info["quota"] = quota
+        if role == "user" or role == "admin" or role == "":
+            if role == "":
+                ad.user_info["role"] = "user"
+            else:
+                ad.user_info["role"] = role
+        else:
+            print("用户类型输入错误，重新输入吧！！")
+            continue
+        ad.user_info["status"] = "1"
+        return ad.user_info
 
 
 def add_user():
@@ -74,7 +90,7 @@ def update_user():
     pass
 
 
-def select_user():
+def list_user():
     """
     打印用户列表
     :return:
@@ -91,8 +107,7 @@ def count():
     """
     AD_MENU_SEL = {
         '1': add_user,
-        '2': freeze_user,
-        '3': update_user
+        '2': list_user,
     }
     print(var.AD_MENU)
     user_option = input("选择操作序号：").strip()
@@ -106,9 +121,3 @@ def run():
     login_user_cid = pu.login('admin')
     if login_user_cid:
         count()
-
-
-li = os.listdir(os.path.join(pp, 'db', 'userinfo'))
-print(li, type(li))
-for i in enumerate(li):
-    print(i[0], ',', i[1])
