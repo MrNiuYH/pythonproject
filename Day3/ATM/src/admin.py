@@ -11,8 +11,7 @@ import json
 
 
 pp = pu.get_path()
-
-login_user_cid = ""
+ndic = {}
 
 
 def input_msg():
@@ -31,7 +30,7 @@ def input_msg():
         ad.user_info["card"] = card
         ad.user_info["uname"] = name
         ad.user_info["passwd"] = p
-        if mobile.isdigit and len(mobile) == 11:
+        if mobile.isdigit() and len(mobile) == 11:
             ad.user_info["phone"] = mobile
         else:
             print("手机号格式错误，重新输入吧！！")
@@ -59,25 +58,34 @@ def add_user():
     """
     dic = input_msg()
     if dic["role"] == "admin":
-        json.dump(dic, open(os.path.join(pu.mkdir('admin', dic["card"]), 'userinfo'), 'w'))
+        json.dump(dic, open(os.path.join(pu.mkdir('admin', dic["card"]), 'info'), 'w'))
     elif dic["role"] == "user":
-        json.dump(dic, open(os.path.join(pu.mkdir('userinfo', dic["card"]), 'userinfo'), 'w'))
+        json.dump(dic, open(os.path.join(pu.mkdir('userinfo', dic["card"]), 'info'), 'w'))
         print(var.REGISTER.format(cid=dic['card']))
     else:
         print("Please select admin or user")
 
 
-def freeze_user():
+def operating(di):
     """
-    冻结用户
+    操作
     :return:
     """
-    cid = input("Please enter a card number to freeze!!!")
-    if os.path.isdir(os.path.join(pp, 'db', 'userinfo', cid)):
-        uu = pu.get_userinfo(cid)
-        uu['status'] = '0'
-        pu.input_user(uu, cid, 'userinfo')
-        print("The user account is frozen")
+    print(var.AD_OPERATING)
+    nu = input("Please select a serial number!!!")
+    if nu.isdigit():
+        if id == "1":
+            di['status'] = '0'
+        elif nu == "2":
+            di['status'] = '1'
+        elif nu == "3":
+            mone = input("Please enter a new quota!:")
+            if mone.isdigit() and int(mone) > 0:
+                di["quota"] = mone
+        elif nu == "4":
+            exit()
+        pu.input_user(di)
+        print("Successful operation")
     else:
         print("Card number does not exist")
 
@@ -87,7 +95,12 @@ def update_user():
     修改用户信息
     :return:
     """
-    pass
+    check_nub = input("Please select a serial number").strip()
+    if check_nub.isdigit() and int(check_nub) in ndic:
+        user_di = json.load(open(os.path.join(pp, 'db', 'userinfo', ndic[int(check_nub)], 'info'), 'r'))
+        for i in user_di.items():
+            print(i)
+        operating(user_di)
 
 
 def list_user():
@@ -98,6 +111,8 @@ def list_user():
     li = os.listdir(os.path.join(pp, 'db', 'userinfo'))
     for i in enumerate(li):
         print(i[0], ',', i[1])
+        ndic[i[0]] = i[1]
+    update_user()
 
 
 def count():
@@ -121,3 +136,5 @@ def run():
     login_user_cid = pu.login('admin')
     if login_user_cid:
         count()
+
+# 6222022166766631

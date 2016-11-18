@@ -45,7 +45,7 @@ def login(file):
         pwd = input("please input password:")
         md_pwd = md5(bytes(pwd, encoding='utf-8'))
         if os.path.isdir(os.path.join(gpath, 'db', file, cid)):
-            if md_pwd == json.load(open(os.path.join(gpath, 'db', file, cid, 'userinfo'), 'r'))['passwd']:
+            if md_pwd == json.load(open(os.path.join(gpath, 'db', file, cid, 'info'), 'r'))['passwd']:
                 return cid
             else:
                 print('password error')
@@ -70,15 +70,15 @@ def get_userinfo(cid):
     """
     gpath = get_path()
     if os.path.isdir(os.path.join(gpath, 'db', 'userinfo', cid)):
-        umsg = json.load(open(os.path.join(gpath, 'db', 'userinfo', cid, 'userinfo'), 'r'))
+        umsg = json.load(open(os.path.join(gpath, 'db', 'userinfo', cid, 'info'), 'r'))
         return umsg
 
 
-def input_user(dic, cid, filename):
+def input_user(dic):
     """
     写入文件
     :param dic:
     :return:
     """
     gpath = get_path()
-    json.dump(dic, open(os.path.join(gpath, 'db', 'userinfo', cid, filename), 'w'))
+    json.dump(dic, open(os.path.join(gpath, 'db', 'userinfo', dic["card"], 'info'), 'w'))
