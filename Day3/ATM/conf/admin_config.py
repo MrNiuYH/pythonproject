@@ -18,4 +18,5 @@ user_info = {'card': '',
              'quota': '',
              'status': '',
              'role': '',
+             'balance': ''
              }

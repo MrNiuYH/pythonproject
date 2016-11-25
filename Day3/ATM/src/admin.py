@@ -21,6 +21,7 @@ def input_msg():
         mobile = input("手机号:").strip()
         print(var.QUOTA_MSG.format(ad.QUOTA))
         quota = input("可透支额度:").strip()
+        balance = input("余 额").strip()
         print(var.USER_MSG)
         role = input("用户类型:").strip()
         num = pu.rand()
@@ -39,6 +40,10 @@ def input_msg():
             ad.user_info["quota"] = ad.QUOTA
         else:
             ad.user_info["quota"] = quota
+        if balance == "":
+            ad.user_info["balance"] = 0
+        else:
+            ad.user_info["balance"] = balance
         if role == "user" or role == "admin" or role == "":
             if role == "":
                 ad.user_info["role"] = "user"

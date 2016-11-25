@@ -7,6 +7,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from lib import public as pu
 from lib import variable as var
 
+uid = ""
+user_dic = ""
 
 def deposit():
     """
@@ -37,7 +39,8 @@ def balance():
     查看账户信息
     :return:
     """
-    pass
+    if uid:
+
 
 
 def repayment():
@@ -46,6 +49,14 @@ def repayment():
     :return:
     """
     pass
+
+
+def logout():
+    """
+    退出
+    :return:
+    """
+    exit()
 
 
 def count():
@@ -57,12 +68,19 @@ def count():
         '1': deposit,
         '2': freeze_user,
         '3': transfer,
-        '4': balance(),
-        '5': repayment()
+        '4': balance,
+        '5': repayment,
+        '6': logout
     }
     print(var.USER_MENU)
+    user_option = input("选择操作序号：").strip()
+    if user_option in US_MENU_SEL:
+        US_MENU_SEL[user_option]()
+    else:
+        print("序号不存在")
 
 
 def run():
-    if pu.login('userinfo'):
+    uid = pu.login('userinfo')
+    if uid:
         count()
