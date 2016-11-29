@@ -172,15 +172,14 @@ import os
 # print(os.path.isfile(os.path.join('D:\pythonproject\Day3\ATM', 'db', 'admin', 'test')))
 
 
-di = {'role': 'user', 'phone': '12312312311', 'status': '0', 'card': '6222021415855153',
-      'passwd': 'e10adc3949ba59abbe56e057f20f883e', 'quota': '9000', 'uname': 'wang'}
-
-li = di.items()
-
-print(li)
-for i in li:
-    print(i)
-
+# di = {'role': 'user', 'phone': '12312312311', 'status': '0', 'card': '6222021415855153',
+#       'passwd': 'e10adc3949ba59abbe56e057f20f883e', 'quota': '9000', 'uname': 'wang'}
+#
+# li = di.items()
+#
+# print(li)
+# for i in li:
+#     print(i)
 
 
 
