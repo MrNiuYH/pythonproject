@@ -180,10 +180,45 @@ import os
 # print(li)
 # for i in li:
 #     print(i)
+# c = "字符串转换为字节".encode(encoding='utf-8')
+# print(c)
+# print(c.decode('utf-8'))
+#
+# s = "xiangshou"
+#
+# s = s.replace('xiang', 'shou')
+# print(s)
+
+import sys
+print(sys.getdefaultencoding())
+s = "百度一下"
+# utf-8转unicode
+a = s.encode('gbk')
+a1 = s.encode('utf-8')
+print(a, type(a), '\n', a1, type(a1))
+print(a1.decode('utf-8'), type(a1.decode('utf-8')))
+print(a.decode('gbk'))
+
+# *args 传位置参数 转换成元组格式    **kwargs 传关键参数  转换成字典格式
+'''
+局部变量  全局变量
+局部变量作用域只是在一个函数体内
+全局变量作用域是整个文件
+如果是数字或字符串等简单的类型，在作用域内更改后不会影响全局变量的值
+如果是字典、列表、集合等可迭代的类型时，局部变量更改会改变全局的值
+'''
 
 
+# 递归
+'''
+自己调用自己
+有明确的结束条件
+问题规模每递归一次就应该比上一次的规模有所减少
+效率低
+'''
 
-
-
-
-
+# 高阶函数
+'''
+   把一个函数名当作实参传递给另一个函数
+   返回值中包含函数名
+'''
