@@ -189,15 +189,15 @@ import os
 # s = s.replace('xiang', 'shou')
 # print(s)
 
-import sys
-print(sys.getdefaultencoding())
-s = "百度一下"
-# utf-8转unicode
-a = s.encode('gbk')
-a1 = s.encode('utf-8')
-print(a, type(a), '\n', a1, type(a1))
-print(a1.decode('utf-8'), type(a1.decode('utf-8')))
-print(a.decode('gbk'))
+# import sys
+# print(sys.getdefaultencoding())
+# s = "百度一下"
+# # utf-8转unicode
+# a = s.encode('gbk')
+# a1 = s.encode('utf-8')
+# print(a, type(a), '\n', a1, type(a1))
+# print(a1.decode('utf-8'), type(a1.decode('utf-8')))
+# print(a.decode('gbk'))
 
 # *args 传位置参数 转换成元组格式    **kwargs 传关键参数  转换成字典格式
 '''
@@ -222,3 +222,58 @@ print(a.decode('gbk'))
    把一个函数名当作实参传递给另一个函数
    返回值中包含函数名
 '''
+'''
+import time
+
+
+def timer(fun):
+    def demo(*args, **kwargs):
+        start_time = time.time()
+        fun(*args, **kwargs)
+        stop_time = time.time()
+        print("the run time is %s" % (stop_time-start_time))
+    return demo
+
+
+@timer
+def test1():
+    time.sleep(2)
+    print("in the test1")
+
+
+@timer
+def test2():
+    time.sleep(2)
+    print("in the test2")
+
+
+@timer
+def test3(name, age):
+    print("my name is {_name}, age is {_age}".format(_name=name, _age=age))
+
+
+test1()
+test2()
+test3("shuaige", 18)
+'''
+
+# 生成器  generator
+'''
+与列表的区别
+1、列表是直接生成保存到缓存中、生成器是使用的时候才生成相应的数据
+2、列表支持切片，直接获取指定位置的值
+'''
+# 回顾列表切片
+lis = [5, 6, 7, 8, 9]
+print(lis[1:4])  # 6,7,8
+print(lis[-4:-1])   # 6,7,8
+'''
+列表生成式
+'''
+li = [i + 5 for i in range(5)]
+print(li)
+
+gen = (i*2 for i in range(3))
+for i in gen:
+    print(i)
+
