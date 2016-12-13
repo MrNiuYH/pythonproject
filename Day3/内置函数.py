@@ -23,7 +23,8 @@ enumerate
 filter
 map
 import functools    functools.reduce
-
+globals
+hash
 '''
 
 print("ass12".capitalize())
