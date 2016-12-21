@@ -33,3 +33,27 @@
 # print(lis)
 # str = 'UPDATE staff_table SET dept="Market" WHERE where dept = "IT"'
 # print(''.join(str.split('"')[3:4]))
+#
+# li = [11, 2, 3, 4]
+#
+#
+# def fun():
+#     li.append(11)
+#
+#
+# fun()
+# print(li)
+
+
+# import sys
+# import os
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# from conf import config
+#
+# with open(config.DBPATH, 'r+', encoding='utf-8') as fi:
+#     print(fi.readlines()[-1][0:1])
+#     # num = fi.read[-1][:1]
+
+
+str = 'UPDATE tab_name SET dept="Market" WHERE where dept = "IT"'
+print(str, type(str))

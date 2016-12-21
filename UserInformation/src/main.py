@@ -49,13 +49,16 @@ def add_information():
     Enroll = time.strftime('%Y-%m-%d', time.localtime())
     if public.get_file():
         with open(config.DBPATH, 'r+', encoding='utf-8') as fi:
-            num = fi.read(-1)[:1]
+            num = fi.readlines()[-1][0:1]
             u_info = ",".join([str(int(num)+1), Name, Age, Phone, Dept, Enroll])
-            fi.write('\n' + u_info)
+            fi.write(u_info)
+            print(config.ADDUSERMSG.format(*[str(int(num)+1), Name, Age, Phone, Dept, Enroll]))
     else:
         u_info = ",".join(['1', Name, Age, Phone, Dept, Enroll])
         with open(config.DBPATH, 'w', encoding='utf-8') as file:
-            file.write(u_info)
+            file.write(u_info + '\n')
+        print(config.ADDUSERMSG.format(*['1', Name, Age, Phone, Dept, Enroll]))
+    li.append(u_info)
 
 
 @if_file
@@ -78,9 +81,11 @@ def del_information():
     if del_num.isdigit() and del_num in dic:
         li.remove(dic[del_num])
         with open(config.DBPATH_BAk, 'w', encoding='utf-8') as bak:
-            bak.write(",".join(li))
+            for i in li:
+                bak.write(i + '\n')
         public.back_ha(config.DBPATH_BAk, config.DBPATH)
         print("已删除！！！")
+
 
 
 @get_user
@@ -91,7 +96,7 @@ def update_information():
     :return:
     """
     print(public.PRINTMSG)
-    del_type = input("输入更新的语句：").strip()
+    del_type = input("输入更新的语句>>：").strip()
     old_key = ''.join(del_type.split('"')[1:2])
     new_key = ''.join(del_type.split('"')[3:4])
     if old_key in li:

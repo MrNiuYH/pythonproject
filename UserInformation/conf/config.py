@@ -3,7 +3,6 @@
 # Author:Mr.Niu
 
 import os
-import sys
 
 LISTMSG = '''
 ---------------------------------------
@@ -17,6 +16,13 @@ LISTMSG = '''
 ---------------------------------------
 '''
 
+ADDUSERMSG = '''
+已添加成功，你添加的用户信息为,请核实:
+id:{:6}  name:{:13}
+age:{:6} phone:{:13}
+dept:{:6}enroll_date:{:13}
+'''
+
 USERMSG = '''
 以下是员工详细信息，请输入对应的序号进行相应操作
 -------------------------------------------
@@ -26,4 +32,3 @@ PRINTMSG = '''表名为tab_name 格式如：UPDATE tab_name SET dept="Market" WH
 
 DBPATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor')
 DBPATH_BAk = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor.bak')
-
