@@ -87,7 +87,6 @@ def del_information():
         print("已删除！！！")
 
 
-
 @get_user
 @if_file
 def update_information():
