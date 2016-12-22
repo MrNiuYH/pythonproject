@@ -31,4 +31,8 @@ id name   age phone        dept enroll_date'''
 PRINTMSG = '''表名为tab_name 格式如：UPDATE tab_name SET dept="Market" WHERE where dept = "IT"'''
 
 DBPATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor')
-DBPATH_BAk = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor.bak')
+DBPATH_BAK = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor.bak')
+
+TYPEMSG = ['id', 'name', 'age', 'phone', 'dept', 'enroll_date']
+
+ERRMSG = "字段错误!!"

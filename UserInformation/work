@@ -6,9 +6,9 @@
 
 　　select name,age from staff_table where age > 22
 
-　　select  * from staff_table where dept = "IT"
+　  select  * from staff_table where dept = "IT"
 
-    select  * from staff_table where enroll_date like "2013"
+   select  * from staff_table where enroll_date like "2013"
 
 查到的信息，打印后，最后面还要显示查到的条数
 

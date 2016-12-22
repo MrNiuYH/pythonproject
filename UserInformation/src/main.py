@@ -80,28 +80,42 @@ def del_information():
     del_num = input("输入相应的序号：").strip()
     if del_num.isdigit() and del_num in dic:
         li.remove(dic[del_num])
-        with open(config.DBPATH_BAk, 'w', encoding='utf-8') as bak:
+        with open(config.DBPATH_BAK, 'w', encoding='utf-8') as bak:
             for i in li:
                 bak.write(i + '\n')
-        public.back_ha(config.DBPATH_BAk, config.DBPATH)
+        public.back_ha(config.DBPATH_BAK, config.DBPATH)
         print("已删除！！！")
 
 
-@get_user
 @if_file
 def update_information():
     """
     更新员工信息
     :return:
     """
-    print(public.PRINTMSG)
-    del_type = input("输入更新的语句>>：").strip()
-    old_key = ''.join(del_type.split('"')[1:2])
-    new_key = ''.join(del_type.split('"')[3:4])
-    if old_key in li:
-        pass
+    print(config.PRINTMSG)
+    del_Statement = input("输入更新的语句>>：").strip()
+    del_typ = ''.join((''.join(del_Statement.split('=')[:1])).split()[-1:])
+    set_typ = ''.join(del_Statement.split()[-3:-2])
+    new_key = ''.join(del_Statement.split('"')[1:2])
+    old_key = ''.join(del_Statement.split('"')[3:4])
+    if del_typ in config.TYPEMSG:
+        if set_typ in config.TYPEMSG:
+            with open(config.DBPATH_BAK, 'w', encoding='utf-8') as old:
+                for line in li:
+                    if old_key in line:
+                        lin = line.split(",")
+                        lin[config.TYPEMSG.index(del_typ)] = new_key
+                        line = ",".join(lin)
+                        old.write(line + '\n')
+                        continue
+                    old.write(line + '\n')
+            public.back_ha(config.DBPATH_BAK, config.DBPATH)
+            print("已更新！")
+        else:
+            print(config.ERRMSG)
     else:
-        print("none")
+        print(config.ERRMSG)
 
 
 

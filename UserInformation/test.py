@@ -35,6 +35,8 @@
 # print(''.join(str.split('"')[3:4]))
 #
 # li = [11, 2, 3, 4]
+# li[li.index(2)] = 3
+# print(li)
 #
 #
 # def fun():
@@ -55,5 +57,13 @@
 #     # num = fi.read[-1][:1]
 
 
-str = 'UPDATE tab_name SET dept="Market" WHERE where dept = "IT"'
-print(str, type(str))
+str = 'UPDATE tab_name SET dept="c" WHERE where dept = "IT"'
+print(''.join(str.split('"')[1:2]))
+li = '7,qing,20,99999999999,c,2016-12-21'
+lis = li.split(',')
+print(lis,type(lis))
+lis[lis.index('c')] = 'aa'
+print(''.join(str.split('"')[1:2]))
+print(lis)
+li = ",".join(lis)
+print(li)
