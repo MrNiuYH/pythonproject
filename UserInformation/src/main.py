@@ -13,17 +13,6 @@ li = public.get_userinfo()
 dic = {}
 
 
-def get_user(fun1):
-    def demo1(*args, **kwargs):
-        print(config.USERMSG)
-        for item in li:
-            print("  ".join(item.split(',')))
-            xuhao = item[:1]
-            dic[xuhao] = item
-        fun1(*args, **kwargs)
-    return demo1
-
-
 def if_file(fun):
     """
     装饰函数
@@ -35,6 +24,22 @@ def if_file(fun):
         else:
             fun(*args, **kwargs)
     return demo
+
+
+def get_user(fun1):
+    """
+    装饰函数
+    :param fun1:
+    :return:
+    """
+    def demo1(*args, **kwargs):
+        print(config.USERMSG)
+        for item in li:
+            print("  ".join(item.split(',')))
+            xuhao = item[:1]
+            dic[xuhao] = item
+        fun1(*args, **kwargs)
+    return demo1
 
 
 def add_information():
@@ -67,7 +72,27 @@ def select_information():
     查询员工信息
     :return:
     """
-    pass
+    while True:
+        print(config.SELECTMSG)
+        # select  * from staff_table where enroll_date like "2013"
+        # select name,age from staff_table where age > 22
+        sel_Statement = input("输入查询语句>>：").strip()
+        judgment = ''.join(sel_Statement.split()[6:7])
+        iftype = ''.join(sel_Statement.split()[5:6])
+        if ''.join(sel_Statement.split()[:1]) == "select":
+            if judgment == ">":
+                if iftype == "age":
+                    pass
+                else:
+                    print(config.ERRMSG)
+            elif judgment == "=":
+                pass
+            elif judgment == "like":
+                pass
+            else:
+                print(config.ERRMSG)
+        else:
+            print(config.ERRMSG)
 
 
 @get_user
@@ -93,7 +118,7 @@ def update_information():
     更新员工信息
     :return:
     """
-    print(config.PRINTMSG)
+    print(config.UPDATEMSG)
     del_Statement = input("输入更新的语句>>：").strip()
     del_typ = ''.join((''.join(del_Statement.split('=')[:1])).split()[-1:])
     set_typ = ''.join(del_Statement.split()[-3:-2])
@@ -116,8 +141,6 @@ def update_information():
             print(config.ERRMSG)
     else:
         print(config.ERRMSG)
-
-
 
 
 def exit_item():

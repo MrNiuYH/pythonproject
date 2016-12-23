@@ -28,11 +28,16 @@ USERMSG = '''
 -------------------------------------------
 id name   age phone        dept enroll_date'''
 
-PRINTMSG = '''表名为tab_name 格式如：UPDATE tab_name SET dept="Market" WHERE where dept = "IT"'''
+UPDATEMSG = '''表名为tab_name 格式如：UPDATE tab_name SET dept="Market" WHERE where dept = "IT"'''
+SELECTMSG = '''
+支持语法:
+select name,age from staff_table where age > 22
+select  * from staff_table where dept = "IT"
+select  * from staff_table where enroll_date like "2013"'''
 
 DBPATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor')
 DBPATH_BAK = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'userinfor.bak')
 
 TYPEMSG = ['id', 'name', 'age', 'phone', 'dept', 'enroll_date']
 
-ERRMSG = "字段错误!!"
+ERRMSG = "语句错误!!"

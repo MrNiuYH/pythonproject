@@ -57,13 +57,16 @@
 #     # num = fi.read[-1][:1]
 
 
-str = 'UPDATE tab_name SET dept="c" WHERE where dept = "IT"'
-print(''.join(str.split('"')[1:2]))
-li = '7,qing,20,99999999999,c,2016-12-21'
-lis = li.split(',')
-print(lis,type(lis))
-lis[lis.index('c')] = 'aa'
-print(''.join(str.split('"')[1:2]))
-print(lis)
-li = ",".join(lis)
-print(li)
+# str = 'UPDATE tab_name SET dept="c" WHERE where dept = "IT"'
+# print(''.join(str.split('"')[1:2]))
+# li = '7,qing,20,99999999999,c,2016-12-21'
+# lis = li.split(',')
+# print(lis,type(lis))
+# lis[lis.index('c')] = 'aa'
+# print(''.join(str.split('"')[1:2]))
+# print(lis)
+# li = ",".join(lis)
+# print(li)
+
+str = 'select  * from staff_table where dept = "IT"'
+print(''.join(str.split()[6:7]))
