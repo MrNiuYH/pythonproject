@@ -68,5 +68,10 @@
 # li = ",".join(lis)
 # print(li)
 
-str = 'select  * from staff_table where dept = "IT"'
-print(''.join(str.split()[6:7]))
+# str = 'select  name,age from staff_table where dept = "IT"'
+# print(''.join(str.split()[-1:]).strip('"'))
+# print(str.split()[1:2])
+# print(len(str.split()[1:2]))
+li = [1, 33, 55, 6]
+
+print(list(filter(lambda a: a > 22, li)))

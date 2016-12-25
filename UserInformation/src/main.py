@@ -4,13 +4,16 @@
 
 import sys
 import os
+import time
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from conf import config
 from lib import public
-import time
 
-li = public.get_userinfo()
 dic = {}
+if public.get_userinfo():
+    li = public.get_userinfo()
+else:
+    li = []
 
 
 def if_file(fun):
@@ -26,20 +29,20 @@ def if_file(fun):
     return demo
 
 
-def get_user(fun1):
-    """
-    装饰函数
-    :param fun1:
-    :return:
-    """
-    def demo1(*args, **kwargs):
-        print(config.USERMSG)
-        for item in li:
-            print("  ".join(item.split(',')))
-            xuhao = item[:1]
-            dic[xuhao] = item
-        fun1(*args, **kwargs)
-    return demo1
+# def get_user(fun1):
+#     """
+#     装饰函数
+#     :param fun1:
+#     :return:
+#     """
+#     def demo1(*args, **kwargs):
+#         print(config.USERMSG)
+#         for item in li:
+#             print("  ".join(item.split(',')))
+#             xuhao = item[:1]
+#             dic[xuhao] = item
+#         fun1(*args, **kwargs)
+#     return demo1
 
 
 def add_information():
@@ -73,18 +76,20 @@ def select_information():
     :return:
     """
     while True:
+        new_li = []
         print(config.SELECTMSG)
         # select  * from staff_table where enroll_date like "2013"
         # select name,age from staff_table where age > 22
         sel_Statement = input("输入查询语句>>：").strip()
+        key = ''.join(sel_Statement.split()[-1:]).strip('"')
         judgment = ''.join(sel_Statement.split()[6:7])
         iftype = ''.join(sel_Statement.split()[5:6])
+        sel_tp = sel_Statement.split()[1:2]
         if ''.join(sel_Statement.split()[:1]) == "select":
             if judgment == ">":
-                if iftype == "age":
-                    pass
-                else:
-                    print(config.ERRMSG)
+                for line in li:
+                    line[config.TYPEMSG.index(judgment)]
+
             elif judgment == "=":
                 pass
             elif judgment == "like":
@@ -95,13 +100,17 @@ def select_information():
             print(config.ERRMSG)
 
 
-@get_user
 @if_file
 def del_information():
     """
     删除员工信息
     :return:
     """
+    print(config.USERMSG)
+    for item in li:
+        print("  ".join(item.split(',')))
+        xuhao = item[:1]
+        dic[xuhao] = item
     del_num = input("输入相应的序号：").strip()
     if del_num.isdigit() and del_num in dic:
         li.remove(dic[del_num])
