@@ -26,3 +26,4 @@ def back_ha(filename, oldfile):   # 复制配置文件
             open(oldfile, 'w', encoding='utf-8') as new:
         for i in old:
             new.write(i)
+

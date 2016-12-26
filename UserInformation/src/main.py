@@ -18,7 +18,7 @@ else:
 
 def if_file(fun):
     """
-    装饰函数
+    装饰函数,查看文件是否存在，存在就可以进行查询删除更新等操作，否则则添加信息
     :return:
     """
     def demo(*args, **kwargs):
@@ -27,22 +27,6 @@ def if_file(fun):
         else:
             fun(*args, **kwargs)
     return demo
-
-
-# def get_user(fun1):
-#     """
-#     装饰函数
-#     :param fun1:
-#     :return:
-#     """
-#     def demo1(*args, **kwargs):
-#         print(config.USERMSG)
-#         for item in li:
-#             print("  ".join(item.split(',')))
-#             xuhao = item[:1]
-#             dic[xuhao] = item
-#         fun1(*args, **kwargs)
-#     return demo1
 
 
 def add_information():
@@ -54,10 +38,10 @@ def add_information():
     Age = input("年 龄：").strip()
     Phone = input("手机号：").strip()
     Dept = input("职 业：").strip()
-    Enroll = time.strftime('%Y-%m-%d', time.localtime())
-    if public.get_file():
+    Enroll = time.strftime('%Y-%m-%d', time.localtime())    # 获取当前年月日
+    if public.get_file():   # 文件存在就追加，不存在就创建
         with open(config.DBPATH, 'r+', encoding='utf-8') as fi:
-            num = fi.readlines()[-1][0:1]
+            num = fi.readlines()[-1][0:1]   # 读取文件最后一行获取pid，id自增
             u_info = ",".join([str(int(num)+1), Name, Age, Phone, Dept, Enroll])
             fi.write(u_info)
             print(config.ADDUSERMSG.format(*[str(int(num)+1), Name, Age, Phone, Dept, Enroll]))
@@ -75,29 +59,50 @@ def select_information():
     查询员工信息
     :return:
     """
+    lia = public.get_userinfo()
     while True:
         new_li = []
+        count = 0
         print(config.SELECTMSG)
-        # select  * from staff_table where enroll_date like "2013"
-        # select name,age from staff_table where age > 22
-        sel_Statement = input("输入查询语句>>：").strip()
+        sel_Statement = input("输入查询语句>>：").strip()  # 获取查询语句，并截取相对应的字段做判断依据
         key = ''.join(sel_Statement.split()[-1:]).strip('"')
         judgment = ''.join(sel_Statement.split()[6:7])
         iftype = ''.join(sel_Statement.split()[5:6])
-        sel_tp = sel_Statement.split()[1:2]
+        sel_tp = ''.join(sel_Statement.split()[1:2])
         if ''.join(sel_Statement.split()[:1]) == "select":
-            if judgment == ">":
-                for line in li:
-                    line[config.TYPEMSG.index(judgment)]
-
-            elif judgment == "=":
-                pass
-            elif judgment == "like":
-                pass
+            if judgment == ">":     # 如果查询语句是 > 号，获取判断的对象做对比，符合要求则添加到新的列表中
+                for line in lia:
+                    lin = line.split(",")
+                    if int(lin[config.TYPEMSG.index(iftype)]) > int(key):
+                        new_li.append(lin)
+                        count += 1
+            elif judgment == "=":   # 如果查询语句是 = 号，获取判断的对象做对比，符合要求则添加到新的列表中
+                for line in lia:
+                    lin = line.split(",")
+                    if lin[config.TYPEMSG.index(iftype)] == key:
+                        new_li.append(lin)
+                        count += 1
+            elif judgment == "like":    # 如果查询语句是 ，获取判断的对象做匹配，符合要求则添加到新的列表中
+                for line in lia:
+                    lin = line.split(",")
+                    if key in lin[config.TYPEMSG.index(iftype)]:
+                        new_li.append(lin)
+                        count += 1
             else:
                 print(config.ERRMSG)
+            print(config.COUNTMSG.format(count))    # 打印总条数
+            if sel_tp == "*":   # 判断查询条件是否为* ，* 显示全部，否则根据查询条件显示相对应的字段
+                for i in new_li:
+                    print(i)
+            else:
+                sel_list = sel_tp.split(',')
+                for i in new_li:
+                    print(i[config.TYPEMSG.index(sel_list[0])], i[config.TYPEMSG.index(sel_list[1])])
         else:
             print(config.ERRMSG)
+        str_y = input("是否继续 y?n").strip()
+        if str_y.lower() == "n":    # 判断是否 继续
+            break
 
 
 @if_file
@@ -112,7 +117,7 @@ def del_information():
         xuhao = item[:1]
         dic[xuhao] = item
     del_num = input("输入相应的序号：").strip()
-    if del_num.isdigit() and del_num in dic:
+    if del_num.isdigit() and del_num in dic:    # 判断序号是否存在，存在则删除列表的对应行，并更新到文件中
         li.remove(dic[del_num])
         with open(config.DBPATH_BAK, 'w', encoding='utf-8') as bak:
             for i in li:
@@ -133,15 +138,15 @@ def update_information():
     set_typ = ''.join(del_Statement.split()[-3:-2])
     new_key = ''.join(del_Statement.split('"')[1:2])
     old_key = ''.join(del_Statement.split('"')[3:4])
-    if del_typ in config.TYPEMSG:
-        if set_typ in config.TYPEMSG:
+    if del_typ in config.TYPEMSG:   # 判断更新的类型是否存在
+        if set_typ in config.TYPEMSG:   # 判断查询的类型是否存在
             with open(config.DBPATH_BAK, 'w', encoding='utf-8') as old:
                 for line in li:
                     if old_key in line:
                         lin = line.split(",")
-                        lin[config.TYPEMSG.index(del_typ)] = new_key
+                        lin[config.TYPEMSG.index(del_typ)] = new_key    # 更新字段
                         line = ",".join(lin)
-                        old.write(line + '\n')
+                        old.write(line + '\n')  # 更新的行写入到文件
                         continue
                     old.write(line + '\n')
             public.back_ha(config.DBPATH_BAK, config.DBPATH)

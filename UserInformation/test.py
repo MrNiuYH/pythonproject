@@ -70,8 +70,12 @@
 
 # str = 'select  name,age from staff_table where dept = "IT"'
 # print(''.join(str.split()[-1:]).strip('"'))
-# print(str.split()[1:2])
+# print(str.split())
+# print("".join(str.split()[1:2]), type(str.split()[1:2]))
+# print(''.join(str.split()[1:2]))
+# print(''.join(str.split()[1:2]).split(','))
 # print(len(str.split()[1:2]))
-li = [1, 33, 55, 6]
-
-print(list(filter(lambda a: a > 22, li)))
+# li = [1, 33, 55, 6]
+# print(li.index(1))
+#
+# print(list(filter(lambda a: a > 22, li)))
