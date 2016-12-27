@@ -79,3 +79,10 @@
 # print(li.index(1))
 #
 # print(list(filter(lambda a: a > 22, li)))
+li = []
+li1 = ['1, 2, 3']
+
+print(",".join(['1', 'Name', 'Age', 'Phone', 'Dept', 'Enroll']).split(','))
+
+if li:
+    print(111)

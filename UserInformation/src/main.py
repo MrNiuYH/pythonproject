@@ -25,7 +25,10 @@ def if_file(fun):
         if not public.get_file():
             print("现在还没有员工信息，请先添加员工信息！！！")
         else:
-            fun(*args, **kwargs)
+            if li:
+                fun(*args, **kwargs)
+            else:
+                print("现在还没有员工信息，请先添加员工信息！！！")
     return demo
 
 
@@ -41,10 +44,13 @@ def add_information():
     Enroll = time.strftime('%Y-%m-%d', time.localtime())    # 获取当前年月日
     if public.get_file():   # 文件存在就追加，不存在就创建
         with open(config.DBPATH, 'r+', encoding='utf-8') as fi:
-            num = fi.readlines()[-1][0:1]   # 读取文件最后一行获取pid，id自增
-            u_info = ",".join([str(int(num)+1), Name, Age, Phone, Dept, Enroll])
+            if li:
+                num = fi.readlines()[-1][0:1]   # 读取文件最后一行获取pid，id自增
+                u_info = ",".join([str(int(num)+1), Name, Age, Phone, Dept, Enroll])
+            else:
+                u_info = ",".join(['1', Name, Age, Phone, Dept, Enroll])
             fi.write(u_info)
-            print(config.ADDUSERMSG.format(*[str(int(num)+1), Name, Age, Phone, Dept, Enroll]))
+            print(config.ADDUSERMSG.format(*u_info.split(',')))
     else:
         u_info = ",".join(['1', Name, Age, Phone, Dept, Enroll])
         with open(config.DBPATH, 'w', encoding='utf-8') as file:
