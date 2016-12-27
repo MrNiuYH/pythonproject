@@ -172,11 +172,11 @@ def exit_item():
 
 
 info = {
-'1': select_information,
-'2': add_information,
-'3': del_information,
-'4': update_information,
-'5': exit_item
+    '1': select_information,
+    '2': add_information,
+    '3': del_information,
+    '4': update_information,
+    '5': exit_item
 }
 
 
