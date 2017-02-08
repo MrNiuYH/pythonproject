@@ -16,6 +16,7 @@ def access_login():
     password = input("password:").strip()
     if demo.acc_file(username, password):
         user_information['infordate'] = demo.acc_file(username, password)
+        user_information['is_access'] = True
         print(user_information)
     else:
         print("用户名或密码错误！")
