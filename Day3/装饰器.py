@@ -52,6 +52,7 @@ admin("babi")
 # 场景应用，三个页面（index，admin，information）进入首页不用登录，进入后台和用户信息页面需要登录
 name, pwd = "jian", "0325"
 
+
 def login(fun):
     def demo(*args, **kwargs):
         usname = input("Username:").strip()
